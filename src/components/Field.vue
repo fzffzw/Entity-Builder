@@ -60,7 +60,10 @@
                     </select>
                 </td>
                 <td>
-                    <span v-on:click="add" class="btn btn-primary plus"> + </span>
+                    <div class="btn-group">
+                        <span v-on:click="add" class="btn btn-primary"> + </span>
+                        <span v-on:click="copy" class="btn btn-info">Copy</span>
+                    </div>
                 </td>
             </tr>
         </tfoot>
@@ -89,15 +92,15 @@
         },
         methods: {
             add() {
-                try {
-                    LDData.show('Select a Type', FieldTypeList, 'type', null, field => {
+                LDData.show('Select a Type', FieldTypeList, 'type', null, field => {
+                    try {
                         const fff = this.manager.cloneType(field.type);
                         this.manager.add(fff);
                         this.rename(fff);
-                    });
-                } catch (error) {
-                    see(error, 400);
-                }
+                    } catch (error) {
+                        see(error, 400);
+                    }
+                });
             },
             addField(name, list) {
                 try {
@@ -126,6 +129,22 @@
                 } catch (error) {
                     see(error, 400);
                 }
+            },
+            copy() {
+                LDData.show('Select a Table', this.EntityList, 'tableName', null, entity => {
+                    try {
+                        entity.FieldManager.list.forEach(field => {
+                            if (this.manager.find(field.name)) {
+                                return;
+                            }
+                            const fff = this.manager.make(field.name, field.type);
+                            fff.load(field);
+                            this.manager.add(fff);
+                        });
+                    } catch (error) {
+                        see(error, 400);
+                    }
+                });
             },
             remove(field) {
                 sure('Are you sure?').then(result => {
