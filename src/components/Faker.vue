@@ -7,12 +7,14 @@
             <tr>
                 <th width="120px">Field</th>
                 <th width="120px">Type</th>
+                <th>PHP / Faker</th>
                 <th>Method / Property</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="field in manager.list" :key="field.name">
                 <td>{{ field.name }}</td>
+                <td>{{ field.type }}</td>
                 <td>
                     <select v-model="field.seed.type" class="form-control">
                         <option value="raw">Raw</option>
@@ -41,13 +43,6 @@
                 </td>
             </tr>
         </tbody>
-        <tfoot>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </tfoot>
     </table>
 </template>
 
