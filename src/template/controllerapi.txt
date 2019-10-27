@@ -37,7 +37,7 @@ class {{ file.name }} extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -50,7 +50,7 @@ class {{ file.name }} extends Controller
      * Update the specified resource in storage.
      *
      * @param  \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }}  $request
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update({{ request.name }} $request, $id)
@@ -63,7 +63,7 @@ class {{ file.name }} extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
