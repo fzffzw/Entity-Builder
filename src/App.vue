@@ -74,4 +74,8 @@
         font-size: large;
         font-weight: bold;
     }
+
+    .wa {
+        width: auto;
+    }
 </style>

@@ -15,7 +15,7 @@
                     <tr>
                         <td>name</td>
                         <td>
-                            <span @click="setName" class="btn btn-default">{{ bus.project.name }}</span>
+                            <input v-model="bus.project.name" type="text" class="form-control wa">
                         </td>
                     </tr>
                     <tr>
@@ -78,17 +78,6 @@
             };
         },
         methods: {
-            setName() {
-                enter('Please enter the name', bus.project.name).then(result => {
-                    if (result.value) {
-                        try {
-                            bus.project.name = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
             setNameSpace() {
                 enter('Please enter the NameSpace', bus.project.NameSpace).then(result => {
                     if (result.value) {
