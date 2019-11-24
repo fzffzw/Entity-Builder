@@ -2,44 +2,52 @@ import Vue from 'vue';
 
 const bus = new Vue({
     data: {
-        tab: 'project',
+        tab: 'Project',
+        item: null,
         php: false,
         project: null,
-        entity: null,
-        file: null,
-        type: ''
+        tabList: [
+            'Project',
+            'File',
+            'Diagram',
+            'Migration',
+            'Model',
+            'Request',
+            'Factory',
+            'More',
+        ]
+    },
+    computed: {
+        itemList() {
+            if ('File' == this.tab) {
+                return this.project.FileTypeManager.list
+            }
+            return this.project.EntityManager.list
+        },
+        file() {
+            if (this.item) {
+                return this.item.FileManager.findByType(this.tab);
+            }
+            return null
+        }
     },
     methods: {
-        show(entity) {
-            this.$set(this, 'entity', entity);
-            this.$emit('EntityChanged');
-            if (this.tab === 'project') {
-                this.$set(this, 'tab', 'Migration');
-            }
-
-            const found = this.entity.FileManager.findByType(this.tab);
-            this.setFile(found);
-        },
         showTab(tab) {
-            if (this.entity == null) {
-                this.setFile(null);
-                return;
+            if ('File' == this.tab) {
+                this.$set(this, 'item', null);
             }
 
-            const found = this.entity.FileManager.findByType(tab);
-            this.setFile(found);
             this.$set(this, 'tab', tab);
             this.$emit('TabChanged');
         },
-        showFile(type) {
-            this.$set(this, 'type', type.name);
+        show(item) {
+            // console.log(item)
+            this.$set(this, 'item', item);
+            this.$emit('ItemChanged');
         },
-        setFile(file) {
-            if (file) {
-                this.$set(this, 'file', file);
-            } else {
-                this.$set(this, 'file', null);
-            }
+        select(tab, item) {
+            this.showTab(tab)
+            this.show(item)
         }
     }
 });
