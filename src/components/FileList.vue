@@ -26,7 +26,7 @@
         },
         methods: {
             find(type) {
-                return bus.entity.FileManager.findByType(type);
+                return bus.item.FileManager.findByType(type);
             }
         }
     };

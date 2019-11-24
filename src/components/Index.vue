@@ -72,7 +72,7 @@
                 this.manager.add(index);
             },
             addField(index) {
-                LDData.show('Select a Field', bus.entity.FieldManager.list, 'name', null, field => {
+                LDData.show('Select a Field', bus.item.FieldManager.list, 'name', null, field => {
                     try {
                         const fff = index.FieldManager.make(field.name);
                         index.FieldManager.add(fff);

@@ -1,6 +1,6 @@
 <template>
     <File :file="bus.file" :type="bus.tab">
-        <Faker :manager="bus.entity.FieldManager"></Faker>
+        <Faker :manager="bus.item.FieldManager"></Faker>
     </File>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <File :file="bus.file" :type="bus.tab">
-        <Validation :manager="bus.entity.FieldManager" :entity="bus.entity"></Validation>
+        <Validation :manager="bus.item.FieldManager" :entity="bus.item"></Validation>
     </File>
 </template>
 

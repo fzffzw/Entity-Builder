@@ -98,7 +98,7 @@
                     this.setKeyInPivot(key);
                     return;
                 }
-                const entity = bus.entity;
+                const entity = bus.item;
                 this.setKey(key, entity);
             },
             setKeyInPivot(key) {

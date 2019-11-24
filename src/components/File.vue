@@ -37,9 +37,8 @@
         methods: {
             add() {
                 try {
-                    const file = bus.entity.FileManager.make(this.type);
-                    bus.entity.FileManager.add(file);
-                    bus.file = file;
+                    const file = bus.item.FileManager.make(this.type);
+                    bus.item.FileManager.add(file);
                 } catch (error) {
                     see(error, 400);
                 }
@@ -66,7 +65,7 @@
             },
             preview() {
                 try {
-                    const code = render(bus.project, bus.entity, this.file);
+                    const code = render(bus.project, bus.item, this.file);
                     CDData.show(this.file.fileName, code);
                 } catch (error) {
                     see(error, 400);
@@ -75,7 +74,7 @@
             remove() {
                 sure('Are you sure?').then(result => {
                     if (result.value) {
-                        bus.entity.FileManager.remove(this.file);
+                        bus.item.FileManager.remove(this.file);
                         bus.showTab('project');
                     }
                 });

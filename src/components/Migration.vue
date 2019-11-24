@@ -1,7 +1,7 @@
 <template>
     <File :file="bus.file" :type="bus.tab">
-        <Field :manager="bus.entity.FieldManager"></Field>
-        <Index :manager="bus.entity.IndexManager"></Index>
+        <Field :manager="bus.item.FieldManager"></Field>
+        <Index :manager="bus.item.IndexManager"></Index>
     </File>
 </template>
 

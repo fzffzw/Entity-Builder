@@ -1,7 +1,7 @@
 <template>
     <File :file="bus.file" :type="bus.tab">
-        <Cast :manager="bus.entity.FieldManager"></Cast>
-        <RelationList :manager="bus.entity.RelationManager"></RelationList>
+        <Cast :manager="bus.item.FieldManager"></Cast>
+        <RelationList :manager="bus.item.RelationManager"></RelationList>
     </File>
 </template>
 
