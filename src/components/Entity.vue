@@ -43,7 +43,9 @@
                     <span v-if="bus.php" @click="deployAll" class="btn btn-success">Deploy</span>
                     <span v-else @click="zipAll" class="btn btn-success">Zip All</span>
                 </td>
-                <td></td>
+                <td>
+                    <span v-on:click="add" class="btn btn-primary plus"> + </span>
+                </td>
                 <td></td>
                 <td></td>
             </tr>
@@ -66,6 +68,18 @@
             };
         },
         methods: {
+            add() {
+                enter('Please enter the Main name').then(result => {
+                    if (result.value) {
+                        try {
+                            const entity = bus.project.EntityManager.make(result.value);
+                            bus.project.EntityManager.add(entity);
+                        } catch (error) {
+                            see(error, 400);
+                        }
+                    }
+                });
+            },
             setName(entity) {
                 enter('Please enter the Main name', entity.name).then(result => {
                     if (result.value) {
