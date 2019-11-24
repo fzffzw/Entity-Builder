@@ -1,7 +1,12 @@
 <template>
     <div>
+        <div class="title">
+            <h1>File</h1>
+            <span v-on:click="add" class="btn btn-primary"> + </span>
+        </div>
+
         <div v-for="file in bus.project.FileTypeManager.list" :key="file.name">
-            <template v-if="file.name==bus.type">
+            <template v-if="bus.item && file.name==bus.item.name">
                 <table class="table">
                     <caption class="title">
                         <h1>{{ file.name }}</h1>
@@ -66,6 +71,18 @@
             };
         },
         methods: {
+            add() {
+                enter('Please enter the name').then(result => {
+                    if (result.value) {
+                        try {
+                            const file = bus.project.FileTypeManager.make(result.value);
+                            bus.project.FileTypeManager.add(file);
+                        } catch (error) {
+                            see(error, 400);
+                        }
+                    }
+                });
+            },
             plus(key) {
                 if (key) {
                     return key;
