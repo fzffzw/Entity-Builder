@@ -10,37 +10,9 @@
                     <span class="navbar-brand">Entity</span>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li v-bind:class="{active: 'project' == bus.tab}">
-                            <a @click="bus.showTab('project')" href="javascript:void(0);">Project</a>
-                        </li>
-
-                        <li v-bind:class="{active: 'file' == bus.tab}">
-                            <a @click="bus.showTab('file')" href="javascript:void(0);">File</a>
-                        </li>
-
-                        <li v-bind:class="{active: 'diagram' == bus.tab}">
-                            <a @click="bus.showTab('diagram')" href="javascript:void(0);">Diagram</a>
-                        </li>
-
-                        <li v-bind:class="{active: 'Migration' == bus.tab}">
-                            <a @click="bus.showTab('Migration')" href="javascript:void(0);">Table</a>
-                        </li>
-
-                        <li v-bind:class="{active: 'Model' == bus.tab}">
-                            <a @click="bus.showTab('Model')" href="javascript:void(0);">Model</a>
-                        </li>
-
-                        <li v-bind:class="{active: 'Request' == bus.tab}">
-                            <a @click="bus.showTab('Request')" href="javascript:void(0);">Request</a>
-                        </li>
-
-                        <li v-bind:class="{active: 'Factory' == bus.tab}">
-                            <a @click="bus.showTab('Factory')" href="javascript:void(0);">Factory</a>
-                        </li>
-
-                        <li v-if="bus.project" v-bind:class="{active: 'more' == bus.tab}" class="dropdown">
-                            <a @click="bus.showTab('more')" href="javascript:void(0);">More</a>
+                    <ul v-if="bus.project" class="nav navbar-nav">
+                        <li v-for="tab in bus.tabList" :key="tab" :class="{active: tab == bus.tab}">
+                            <a @click="bus.showTab(tab)" href="javascript:void(0);">{{ tab }}</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
