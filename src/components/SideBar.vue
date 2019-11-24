@@ -3,27 +3,14 @@
         <li>
             <h2>{{ bus.project.name }}</h2>
         </li>
-        <li>
-            <span @click="add" class="btn btn-primary plus"> + </span>
-            <br /><br />
+        <li v-for="item in bus.itemList" :key="item.name">
+            <div :class="{'active':bus.item == item}" @click="bus.show(item)">{{ item.name }}</div>
         </li>
-        <template v-if="'file' == bus.tab">
-            <li v-for="file in bus.project.FileTypeManager.list" :key="file.name">
-                <div :class="{'active':bus.type==file.name}" @click="bus.showFile(file)">{{ file.name }}</div>
-            </li>
-        </template>
-
-        <template v-else>
-            <li v-for="entity in bus.project.EntityManager.list" :key="entity.name">
-                <div :class="{'active':bus.entity==entity}" @click="bus.show(entity)">{{ entity.name }}</div>
-            </li>
-        </template>
     </ul>
 </template>
 
 <script>
     import bus from '../helper/event';
-    import { see, enter } from '../helper/dialogue';
 
     export default {
         name: 'SideBar',
@@ -32,25 +19,7 @@
                 bus
             };
         },
-        methods: {
-            add() {
-                enter('Please enter the name').then(result => {
-                    if (result.value) {
-                        try {
-                            if (bus.tab === 'file') {
-                                const file = bus.project.FileTypeManager.make(result.value);
-                                bus.project.FileTypeManager.add(file);
-                            } else {
-                                const entity = bus.project.EntityManager.make(result.value);
-                                bus.project.EntityManager.add(entity);
-                            }
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            }
-        }
+        methods: {}
     };
 </script>
 
