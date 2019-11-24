@@ -16,6 +16,12 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                        <li :class="{active: 'API' == bus.tool}">
+                            <a @click="bus.showTool('API')" href="javascript:void(0);">API</a>
+                        </li>
+                        <li :class="{active: 'Entity' == bus.tool}">
+                            <a @click="bus.showTool('Entity')" href="javascript:void(0);">Entity</a>
+                        </li>
                         <li><a href="https://github.com/GooGee/Entity-Builder">GitHub</a></li>
                     </ul>
                 </div>

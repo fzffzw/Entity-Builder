@@ -16,9 +16,11 @@
         </div>
 
         <template v-if="bus.project">
-            <Project></Project>
+            <Project v-if="'Entity' == bus.tool"></Project>
 
             <Diagram v-if="'Diagram' == bus.tab"></Diagram>
+
+            <Document v-if="'API' == bus.tool"></Document>
 
             <FileType v-if="'File' == bus.tab"></FileType>
         </template>
@@ -35,10 +37,11 @@
     import Diagram from './Diagram';
     import FileType from './FileType';
     import Project from './Project';
+    import Document from './api/Document';
 
     export default {
         name: 'Builder',
-        components: { Project, Diagram, FileType },
+        components: { Project, Diagram, Document, FileType },
         data() {
             return {
                 bus
