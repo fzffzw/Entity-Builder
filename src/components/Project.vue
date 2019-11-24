@@ -1,6 +1,6 @@
 <template>
     <div>
-        <template v-if="'project' == bus.tab">
+        <template v-if="'Project' == bus.tab">
             <table class="table">
                 <caption>
                     <h3>Property</h3>
@@ -30,11 +30,7 @@
             <Entity :manager="bus.project.EntityManager"></Entity>
         </template>
 
-        <template v-if="bus.entity">
-            <Diagram v-if="'diagram' == bus.tab"></Diagram>
-
-            <FileType v-if="'file' == bus.tab"></FileType>
-
+        <template v-if="bus.item">
             <Migration v-if="'Migration' == bus.tab"></Migration>
 
             <Model v-if="'Model' == bus.tab"></Model>
@@ -43,7 +39,7 @@
 
             <Factory v-if="'Factory' == bus.tab"></Factory>
 
-            <FileList v-if="'more' == bus.tab"></FileList>
+            <FileList v-if="'More' == bus.tab"></FileList>
         </template>
     </div>
 </template>
@@ -51,8 +47,6 @@
 <script>
     import bus from '../helper/event';
     import { see, enter } from '../helper/dialogue';
-    import Diagram from './Diagram';
-    import FileType from './FileType';
     import Migration from './Migration';
     import Model from './Model';
     import Factory from './Factory';
@@ -64,8 +58,6 @@
         name: 'Project',
         components: {
             Entity,
-            Diagram,
-            FileType,
             Migration,
             Model,
             Factory,

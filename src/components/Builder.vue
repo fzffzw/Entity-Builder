@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="'project' == bus.tab" class="title">
+        <div v-if="'Project' == bus.tab" class="title">
             <h1>Project</h1>
             <span class="btn-group">
                 <span v-on:click="make" class="btn btn-primary">New</span>
@@ -15,7 +15,13 @@
             <span v-if="bus.project">{{ bus.project.fileName }}</span>
         </div>
 
-        <Project v-if="bus.project"></Project>
+        <template v-if="bus.project">
+            <Project></Project>
+
+            <Diagram v-if="'Diagram' == bus.tab"></Diagram>
+
+            <FileType v-if="'File' == bus.tab"></FileType>
+        </template>
     </div>
 </template>
 
@@ -26,11 +32,13 @@
     import { read } from '../helper/net';
     import { connect, getDB, save } from '../helper/request';
     import { download } from '../helper/zip';
+    import Diagram from './Diagram';
+    import FileType from './FileType';
     import Project from './Project';
 
     export default {
         name: 'Builder',
-        components: { Project },
+        components: { Project, Diagram, FileType },
         data() {
             return {
                 bus
