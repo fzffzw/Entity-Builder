@@ -1,5 +1,7 @@
 import Entity from '../../../entity'
 
+import preset from './preset'
+
 export default Entity
 
 export function addUser(project) {
@@ -10,11 +12,13 @@ export function addUser(project) {
 
 export function loadProject(json) {
     const project = new Entity.Project(json.name)
+    preset(project)
     project.load(json)
     return project
 }
 
 export function makeProject(name) {
     const project = new Entity.Project(name)
+    preset(project)
     return project
 }
