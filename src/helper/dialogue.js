@@ -1,26 +1,26 @@
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2'
 
 export function see(message, status = 0) {
-    let icon = 'info';
+    let icon = 'info'
     if (status >= 400) {
-        icon = 'error';
+        icon = 'error'
     } else if (status >= 300) {
-        icon = 'warning';
+        icon = 'warning'
     } else if (status >= 200) {
-        icon = 'success';
+        icon = 'success'
     } else if (status >= 100) {
-        icon = 'question';
+        icon = 'question'
     }
 
-    let text = message;
+    let text = message
     if (typeof message === 'object') {
         if (message.message) {
-            text = message.message;
+            text = message.message
         } else {
-            text = JSON.stringify(message);
+            text = JSON.stringify(message)
         }
     }
-    return Swal.fire(text, undefined, icon);
+    return Swal.fire(text, undefined, icon)
 }
 
 export function sure(message) {
@@ -30,8 +30,8 @@ export function sure(message) {
         showConfirmButton: true,
         showCancelButton: true,
         confirmButtonText: 'Yes',
-        cancelButtonText: 'No'
-    });
+        cancelButtonText: 'No',
+    })
 }
 
 export function enter(message, value = '') {
@@ -39,6 +39,6 @@ export function enter(message, value = '') {
         title: message,
         input: 'text',
         inputValue: value,
-        showCancelButton: true
-    });
+        showCancelButton: true,
+    })
 }

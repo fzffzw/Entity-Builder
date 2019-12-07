@@ -1,55 +1,55 @@
-import Entity from './entity';
+import Entity from './entity'
 
-export const RuleList = Entity.RuleList;
+export const RuleList = Entity.RuleList
 
 export function check(entity) {
-    setUnique(entity);
-    entity.FieldManager.list.forEach(field => setRule(field));
+    setUnique(entity)
+    entity.FieldManager.list.forEach(field => setRule(field))
 }
 
 function add(field, name, isBoolean = true) {
-    const found = field.RuleManager.find(name);
+    const found = field.RuleManager.find(name)
     if (found) {
-        return found;
+        return found
     }
-    const rule = field.RuleManager.make(name, isBoolean);
-    field.RuleManager.add(rule);
-    return rule;
+    const rule = field.RuleManager.make(name, isBoolean)
+    field.RuleManager.add(rule)
+    return rule
 }
 
 function isString(field) {
-    return field.type === 'char' || field.type === 'string';
+    return field.type === 'char' || field.type === 'string'
 }
 
 function setRule(field) {
     if (field.included) {
         // go on
     } else {
-        return;
+        return
     }
 
     if (field.isIncrement) {
-        return;
+        return
     }
 
-    add(field, 'required');
+    add(field, 'required')
 
     if (field.type === 'boolean') {
-        add(field, 'boolean');
-        return;
+        add(field, 'boolean')
+        return
     }
     if (field.isInteger) {
-        add(field, 'integer');
-        return;
+        add(field, 'integer')
+        return
     }
     if (field.isNumber) {
-        add(field, 'numeric');
-        return;
+        add(field, 'numeric')
+        return
     }
     if (isString(field)) {
         if (field.length) {
-            const max = add(field, 'max', false);
-            max.value = field.length;
+            const max = add(field, 'max', false)
+            max.value = field.length
         }
     }
 }
@@ -57,42 +57,42 @@ function setRule(field) {
 function setUnique(entity) {
     entity.IndexManager.uniqueIndexList.forEach(index => {
         if (index.FieldManager.list.length === 1) {
-            const field = index.FieldManager.list[0];
-            const found = entity.FieldManager.find(field.name);
+            const field = index.FieldManager.list[0]
+            const found = entity.FieldManager.find(field.name)
             if (found) {
-                const rule = add(found, 'unique', false);
-                rule.value = entity.tableName;
+                const rule = add(found, 'unique', false)
+                rule.value = entity.tableName
             }
         }
-    });
+    })
 }
 
 export const REList = [
     {
         name: 'A-Z',
-        text: '/^[A-Z]+$/'
+        text: '/^[A-Z]+$/',
     },
     {
         name: 'a-z',
-        text: '/^[a-z]+$/'
+        text: '/^[a-z]+$/',
     },
     {
         name: '0-9',
-        text: '/^\\d+$/'
+        text: '/^\\d+$/',
     },
     {
         name: 'A-Z a-z',
-        text: '/^[A-Za-z]+$/'
+        text: '/^[A-Za-z]+$/',
     },
     {
         name: 'A-Z a-z 0-9',
-        text: '/^[A-Za-z0-9]+$/'
+        text: '/^[A-Za-z0-9]+$/',
     },
     {
         name: 'A-Z a-z 0-9 _',
-        text: '/^[A-Z_a-z][A-Z_a-z0-9]+$/'
-    }
-];
+        text: '/^[A-Z_a-z][A-Z_a-z0-9]+$/',
+    },
+]
 
 export const KindList = [
     {
@@ -107,8 +107,8 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'in'),
             RuleList.find(rule => rule.name === 'not_in'),
             RuleList.find(rule => rule.name === 'not_regex'),
-            RuleList.find(rule => rule.name === 'regex')
-        ]
+            RuleList.find(rule => rule.name === 'regex'),
+        ],
     },
     {
         title: 'Date',
@@ -120,8 +120,8 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'date'),
             RuleList.find(rule => rule.name === 'date_equals'),
             RuleList.find(rule => rule.name === 'date_format'),
-            RuleList.find(rule => rule.name === 'timezone')
-        ]
+            RuleList.find(rule => rule.name === 'timezone'),
+        ],
     },
     {
         title: 'Field',
@@ -133,12 +133,18 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'lt'),
             RuleList.find(rule => rule.name === 'lte'),
             RuleList.find(rule => rule.name === 'in_array'),
-            RuleList.find(rule => rule.name === 'same')
-        ]
+            RuleList.find(rule => rule.name === 'same'),
+        ],
     },
     {
         title: 'File',
-        list: [RuleList.find(rule => rule.name === 'dimensions'), RuleList.find(rule => rule.name === 'file'), RuleList.find(rule => rule.name === 'image'), RuleList.find(rule => rule.name === 'mimetypes'), RuleList.find(rule => rule.name === 'mimes')]
+        list: [
+            RuleList.find(rule => rule.name === 'dimensions'),
+            RuleList.find(rule => rule.name === 'file'),
+            RuleList.find(rule => rule.name === 'image'),
+            RuleList.find(rule => rule.name === 'mimetypes'),
+            RuleList.find(rule => rule.name === 'mimes'),
+        ],
     },
     {
         title: 'Other',
@@ -149,8 +155,8 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'filled'),
             RuleList.find(rule => rule.name === 'present'),
             RuleList.find(rule => rule.name === 'required'),
-            RuleList.find(rule => rule.name === 'sometimes')
-        ]
+            RuleList.find(rule => rule.name === 'sometimes'),
+        ],
     },
     {
         title: 'Require',
@@ -160,8 +166,8 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'required_with'),
             RuleList.find(rule => rule.name === 'required_with_all'),
             RuleList.find(rule => rule.name === 'required_without'),
-            RuleList.find(rule => rule.name === 'required_without_all')
-        ]
+            RuleList.find(rule => rule.name === 'required_without_all'),
+        ],
     },
     {
         title: 'Size',
@@ -171,8 +177,8 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'digits_between'),
             RuleList.find(rule => rule.name === 'max'),
             RuleList.find(rule => rule.name === 'min'),
-            RuleList.find(rule => rule.name === 'size')
-        ]
+            RuleList.find(rule => rule.name === 'size'),
+        ],
     },
     {
         title: 'Type',
@@ -182,8 +188,8 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'integer'),
             RuleList.find(rule => rule.name === 'nullable'),
             RuleList.find(rule => rule.name === 'numeric'),
-            RuleList.find(rule => rule.name === 'string')
-        ]
+            RuleList.find(rule => rule.name === 'string'),
+        ],
     },
     {
         title: 'WWW',
@@ -196,7 +202,7 @@ export const KindList = [
             RuleList.find(rule => rule.name === 'ipv6'),
             RuleList.find(rule => rule.name === 'json'),
             RuleList.find(rule => rule.name === 'url'),
-            RuleList.find(rule => rule.name === 'uuid')
-        ]
-    }
-];
+            RuleList.find(rule => rule.name === 'uuid'),
+        ],
+    },
+]

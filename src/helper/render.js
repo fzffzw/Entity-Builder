@@ -1,5 +1,5 @@
-import nunjucks from 'nunjucks';
-import Template from './template';
+import nunjucks from 'nunjucks'
+import Template from './template'
 
 export default function render(project, entity, file) {
     const data = {
@@ -7,13 +7,13 @@ export default function render(project, entity, file) {
         entity,
         file,
         model: entity.FileManager.findByType('Model'),
-        request: entity.FileManager.findByType('Request')
-    };
-    let template = Template[file.FileType.templateName];
-    if (file.FileType.template) {
-        template = file.FileType.template;
+        request: entity.FileManager.findByType('Request'),
     }
-    const result = nunjucks.renderString(template, data);
+    let template = Template[file.FileType.templateName]
+    if (file.FileType.template) {
+        template = file.FileType.template
+    }
+    const result = nunjucks.renderString(template, data)
     // console.log(result)
-    return result;
+    return result
 }
