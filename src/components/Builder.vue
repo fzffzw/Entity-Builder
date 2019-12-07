@@ -154,7 +154,7 @@
                         try {
                             bus.project = makeProject(result.value);
                             const user = addUser(bus.project);
-                            bus.show(user);
+                            bus.select('Migration', user);
                         } catch (error) {
                             see(error, 400);
                         }
