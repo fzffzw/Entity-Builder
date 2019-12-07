@@ -15,7 +15,7 @@
                     <tr>
                         <td>name</td>
                         <td>
-                            <input v-model="bus.project.name" type="text" class="form-control wa">
+                            <input v-model="bus.project.name" type="text" class="form-control wa" />
                         </td>
                     </tr>
                     <tr>
@@ -45,42 +45,42 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, enter } from '../helper/dialogue';
-    import Migration from './Migration';
-    import Model from './Model';
-    import Factory from './Factory';
-    import Entity from './Entity';
-    import Request from './Request';
-    import FileList from './FileList';
+import bus from '../helper/event'
+import { see, enter } from '../helper/dialogue'
+import Migration from './Migration'
+import Model from './Model'
+import Factory from './Factory'
+import Entity from './Entity'
+import Request from './Request'
+import FileList from './FileList'
 
-    export default {
-        name: 'Project',
-        components: {
-            Entity,
-            Migration,
-            Model,
-            Factory,
-            Request,
-            FileList
-        },
-        data() {
-            return {
-                bus
-            };
-        },
-        methods: {
-            setNameSpace() {
-                enter('Please enter the NameSpace', bus.project.NameSpace).then(result => {
-                    if (result.value) {
-                        try {
-                            bus.project.NameSpace = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            }
+export default {
+    name: 'Project',
+    components: {
+        Entity,
+        Migration,
+        Model,
+        Factory,
+        Request,
+        FileList,
+    },
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+    methods: {
+        setNameSpace() {
+            enter('Please enter the NameSpace', bus.project.NameSpace).then(result => {
+                if (result.value) {
+                    try {
+                        bus.project.NameSpace = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+    },
+}
 </script>

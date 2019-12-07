@@ -30,39 +30,39 @@
 </template>
 
 <script>
-    import Entity from '../helper/entity';
-    import { enter } from '../helper/dialogue';
-    import { LDData } from './ListDialogue';
+import Entity from '../helper/entity'
+import { enter } from '../helper/dialogue'
+import { LDData } from './ListDialogue'
 
-    const CastTypeList = [''].concat(Array.from(Entity.PHPTypeCastMap.keys()));
+const CastTypeList = [''].concat(Array.from(Entity.PHPTypeCastMap.keys()))
 
-    export default {
-        name: 'Cast',
-        props: ['manager'],
-        data() {
-            return {};
-        },
-        methods: {
-            plus(field) {
-                if (field.cast) {
-                    return field.cast;
-                }
-                return '+';
-            },
-            select(field) {
-                LDData.show('Select a Type', CastTypeList, null, null, resule => {
-                    field.cast = resule;
-                });
-            },
-            change(field) {
-                if (field.cast) {
-                    enter('Please enter something', field.cast).then(result => {
-                        if (result.value) {
-                            field.cast = result.value;
-                        }
-                    });
-                }
+export default {
+    name: 'Cast',
+    props: ['manager'],
+    data() {
+        return {}
+    },
+    methods: {
+        plus(field) {
+            if (field.cast) {
+                return field.cast
             }
-        }
-    };
+            return '+'
+        },
+        select(field) {
+            LDData.show('Select a Type', CastTypeList, null, null, resule => {
+                field.cast = resule
+            })
+        },
+        change(field) {
+            if (field.cast) {
+                enter('Please enter something', field.cast).then(result => {
+                    if (result.value) {
+                        field.cast = result.value
+                    }
+                })
+            }
+        },
+    },
+}
 </script>

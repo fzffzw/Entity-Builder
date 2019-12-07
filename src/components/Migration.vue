@@ -6,18 +6,18 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import File from './File';
-    import Field from './Field';
-    import Index from './Index';
+import bus from '../helper/event'
+import File from './File'
+import Field from './Field'
+import Index from './Index'
 
-    export default {
-        name: 'Migration',
-        components: { File, Field, Index },
-        data() {
-            return {
-                bus
-            };
+export default {
+    name: 'Migration',
+    components: { File, Field, Index },
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+}
 </script>

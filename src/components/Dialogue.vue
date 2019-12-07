@@ -1,6 +1,6 @@
 <template>
     <div v-if="dData.visible" @click="close" class="modal show" tabindex="-1" role="dialog">
-        <div @click.stop="" :class="{'modal-lg':dData.big}" class="modal-dialog" role="document">
+        <div @click.stop="" :class="{ 'modal-lg': dData.big }" class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <span v-show="dData.canClose" @click="close" class="close" aria-label="Close">
@@ -25,32 +25,32 @@
 </template>
 
 <script>
-    export class DialogueData {
-        constructor(canClose = true, hasFooter = false, big = false) {
-            this.visible = false;
-            this.canClose = canClose;
-            this.hasFooter = hasFooter;
-            this.big = big;
-        }
-
-        show() {
-            this.visible = true;
-        }
-
-        close() {
-            this.visible = false;
-        }
+export class DialogueData {
+    constructor(canClose = true, hasFooter = false, big = false) {
+        this.visible = false
+        this.canClose = canClose
+        this.hasFooter = hasFooter
+        this.big = big
     }
 
-    export const Dialogue = {
-        name: 'Dialogue',
-        props: ['dData'],
-        methods: {
-            close() {
-                this.dData.close();
-            }
-        }
-    };
+    show() {
+        this.visible = true
+    }
 
-    export default Dialogue;
+    close() {
+        this.visible = false
+    }
+}
+
+export const Dialogue = {
+    name: 'Dialogue',
+    props: ['dData'],
+    methods: {
+        close() {
+            this.dData.close()
+        },
+    },
+}
+
+export default Dialogue
 </script>

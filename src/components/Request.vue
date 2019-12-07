@@ -5,17 +5,17 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import File from './File';
-    import Validation from './Validation';
+import bus from '../helper/event'
+import File from './File'
+import Validation from './Validation'
 
-    export default {
-        name: 'Request',
-        components: { File, Validation },
-        data() {
-            return {
-                bus
-            };
+export default {
+    name: 'Request',
+    components: { File, Validation },
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+}
 </script>

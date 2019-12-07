@@ -1,12 +1,12 @@
 <template>
-    <span :class="{editing:editing}">
+    <span :class="{ editing: editing }">
         <template v-if="editing">
-            <span @click="$emit('remove')" class="btn btn-default">- {{ rule.name }}</span>&nbsp;
+            <span @click="$emit('remove')" class="btn btn-default"> - {{ rule.name }} </span>&nbsp;
 
-            <template v-if="rule.isBoolean===false">
+            <template v-if="rule.isBoolean === false">
                 <span v-if="isRE" class="input-group">
                     <span class="input-group-btn">
-                        <span class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> * </span>
+                        <span class="btn btn-default dropdown-toggle" data-toggle="dropdown"> * </span>
                         <ul class="dropdown-menu">
                             <template v-for="(re, index) in REList">
                                 <li v-if="re.name" :key="index">
@@ -25,26 +25,26 @@
 
         <template v-else>
             <span>{{ rule.name }}</span>
-            <span v-if="rule.isBoolean===false"> {{ rule.value }}</span>
+            <span v-if="rule.isBoolean === false"> {{ rule.value }}</span>
         </template>
     </span>
 </template>
 
 <script>
-    import { REList } from '../helper/rule';
+import { REList } from '../helper/rule'
 
-    export default {
-        name: 'Rule',
-        props: ['rule', 'editing'],
-        data() {
-            return {
-                REList
-            };
-        },
-        computed: {
-            isRE() {
-                return this.rule.name === 'regex' || this.rule.name === 'not_regex';
-            }
+export default {
+    name: 'Rule',
+    props: ['rule', 'editing'],
+    data() {
+        return {
+            REList,
         }
-    };
+    },
+    computed: {
+        isRE() {
+            return this.rule.name === 'regex' || this.rule.name === 'not_regex'
+        },
+    },
+}
 </script>

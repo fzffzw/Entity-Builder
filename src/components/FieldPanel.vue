@@ -1,5 +1,5 @@
 <template>
-    <div @click="editing=true">
+    <div @click="editing = true">
         <div v-if="editing">
             <span>Default: </span>
             <span class="input-group">
@@ -38,33 +38,33 @@
         </template>
 
         <div v-if="editing">
-            <span @click.stop="editing=false" class="btn btn-primary">OK</span>
+            <span @click.stop="editing = false" class="btn btn-primary">OK</span>
         </div>
         <div v-else>...</div>
     </div>
 </template>
 
 <script>
-    export default {
-        name: 'FieldPanel',
-        props: ['field'],
-        data() {
-            return {
-                editing: false
-            };
-        },
-        methods: {
-            check(field) {
-                if (field.value === '') {
-                    if (field.isNumber) {
-                        field.value = '0';
-                    } else {
-                        field.value = "''";
-                    }
-                } else {
-                    field.value = '';
-                }
-            }
+export default {
+    name: 'FieldPanel',
+    props: ['field'],
+    data() {
+        return {
+            editing: false,
         }
-    };
+    },
+    methods: {
+        check(field) {
+            if (field.value === '') {
+                if (field.isNumber) {
+                    field.value = '0'
+                } else {
+                    field.value = "''"
+                }
+            } else {
+                field.value = ''
+            }
+        },
+    },
+}
 </script>

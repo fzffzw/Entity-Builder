@@ -20,65 +20,65 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, sure } from '../helper/dialogue';
-    import render from '../helper/render';
-    import Template from '../helper/template';
-    import { CDData } from './CodeDialogue';
+import bus from '../helper/event'
+import { see, sure } from '../helper/dialogue'
+import render from '../helper/render'
+import Template from '../helper/template'
+import { CDData } from './CodeDialogue'
 
-    export default {
-        name: 'File',
-        props: ['file', 'type'],
-        data() {
-            return {
-                bus
-            };
-        },
-        methods: {
-            add() {
-                try {
-                    const file = bus.item.FileManager.make(this.type);
-                    bus.item.FileManager.add(file);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            template() {
-                let template = '';
-                const type = this.file.FileType;
-                const original = Template[type.templateName];
-                if (type.template) {
-                    template = type.template;
-                } else {
-                    if (type.templateName) {
-                        template = original;
-                    }
-                }
-
-                CDData.show(type.name, template, true, original, code => {
-                    if (code === original) {
-                        type.template = '';
-                    } else {
-                        type.template = code;
-                    }
-                });
-            },
-            preview() {
-                try {
-                    const code = render(bus.project, bus.item, this.file);
-                    CDData.show(this.file.fileName, code);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            remove() {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        bus.item.FileManager.remove(this.file);
-                        bus.showTab('project');
-                    }
-                });
-            }
+export default {
+    name: 'File',
+    props: ['file', 'type'],
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+    methods: {
+        add() {
+            try {
+                const file = bus.item.FileManager.make(this.type)
+                bus.item.FileManager.add(file)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        template() {
+            let template = ''
+            const type = this.file.FileType
+            const original = Template[type.templateName]
+            if (type.template) {
+                template = type.template
+            } else {
+                if (type.templateName) {
+                    template = original
+                }
+            }
+
+            CDData.show(type.name, template, true, original, code => {
+                if (code === original) {
+                    type.template = ''
+                } else {
+                    type.template = code
+                }
+            })
+        },
+        preview() {
+            try {
+                const code = render(bus.project, bus.item, this.file)
+                CDData.show(this.file.fileName, code)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        remove() {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    bus.item.FileManager.remove(this.file)
+                    bus.showTab('project')
+                }
+            })
+        },
+    },
+}
 </script>

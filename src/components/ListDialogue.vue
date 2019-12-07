@@ -8,43 +8,43 @@
 </template>
 
 <script>
-    import { Dialogue, DialogueData } from './Dialogue';
-    import { List, ListData } from './List';
+import { Dialogue, DialogueData } from './Dialogue'
+import { List, ListData } from './List'
 
-    export class ListDialogueData {
-        constructor() {
-            this.dData = new DialogueData();
-            this.lData = null;
-        }
-
-        /**
-         * message
-         * item list
-         * member name of item, for displaying
-         * member name of item, for displaying extra info
-         * call back function
-         **/
-        show(message, list, textName, infoName, CallBack) {
-            this.message = message;
-            this.lData = new ListData(list, textName, infoName, CallBack);
-            this.dData.show();
-        }
+export class ListDialogueData {
+    constructor() {
+        this.dData = new DialogueData()
+        this.lData = null
     }
 
-    export const LDData = new ListDialogueData();
+    /**
+     * message
+     * item list
+     * member name of item, for displaying
+     * member name of item, for displaying extra info
+     * call back function
+     **/
+    show(message, list, textName, infoName, CallBack) {
+        this.message = message
+        this.lData = new ListData(list, textName, infoName, CallBack)
+        this.dData.show()
+    }
+}
 
-    export default {
-        name: 'ListDialogue',
-        components: { Dialogue, List },
-        data() {
-            return {
-                LDData: LDData
-            };
-        },
-        methods: {
-            close() {
-                LDData.dData.close();
-            }
+export const LDData = new ListDialogueData()
+
+export default {
+    name: 'ListDialogue',
+    components: { Dialogue, List },
+    data() {
+        return {
+            LDData: LDData,
         }
-    };
+    },
+    methods: {
+        close() {
+            LDData.dData.close()
+        },
+    },
+}
 </script>

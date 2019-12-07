@@ -6,18 +6,18 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import File from './File';
-    import Cast from './Cast';
-    import RelationList from './RelationList';
+import bus from '../helper/event'
+import File from './File'
+import Cast from './Cast'
+import RelationList from './RelationList'
 
-    export default {
-        name: 'Model',
-        components: { File, Cast, RelationList },
-        data() {
-            return {
-                bus
-            };
+export default {
+    name: 'Model',
+    components: { File, Cast, RelationList },
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+}
 </script>

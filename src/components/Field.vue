@@ -22,10 +22,10 @@
                     </div>
                 </td>
                 <td>
-                    <span v-on:click="rename(field)" class="btn btn-default">{{ field.name }}</span>
+                    <span v-on:click="rename(field)" class="btn btn-default"> {{ field.name }} </span>
                 </td>
                 <td>
-                    <span v-on:click="setType(field)" class="btn btn-default">{{ field.type }}</span>
+                    <span v-on:click="setType(field)" class="btn btn-default"> {{ field.type }} </span>
                 </td>
                 <td><input v-if="field.hasLength" v-model="field.length" class="form-control" type="text" /></td>
                 <td>
@@ -44,13 +44,17 @@
                 <td>
                     <select @change="addField($event.target.value, IntegerFieldList)" class="form-control">
                         <option selected="true" disabled="disabled">...</option>
-                        <option v-for="field in IntegerFieldList" :value="field.name" :key="field.name">{{ field.name }}</option>
+                        <option v-for="field in IntegerFieldList" :value="field.name" :key="field.name">{{
+                            field.name
+                        }}</option>
                     </select>
                 </td>
                 <td>
                     <select @change="addField($event.target.value, CommonFieldList)" class="form-control">
                         <option selected="true" disabled="disabled">...</option>
-                        <option v-for="field in CommonFieldList" :value="field.name" :key="field.name">{{ field.name }}</option>
+                        <option v-for="field in CommonFieldList" :value="field.name" :key="field.name">{{
+                            field.name
+                        }}</option>
                     </select>
                 </td>
                 <td>
@@ -71,104 +75,104 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, sure, enter } from '../helper/dialogue';
-    import { CommonFieldList, CommonTypeList, FieldTypeList, IntegerFieldList } from '../helper/field';
-    import FieldPanel from './FieldPanel';
-    import { LDData } from './ListDialogue';
+import bus from '../helper/event'
+import { see, sure, enter } from '../helper/dialogue'
+import { CommonFieldList, CommonTypeList, FieldTypeList, IntegerFieldList } from '../helper/field'
+import FieldPanel from './FieldPanel'
+import { LDData } from './ListDialogue'
 
-    export default {
-        name: 'Field',
-        props: ['manager'],
-        components: { FieldPanel },
-        data() {
-            return {
-                EntityList: bus.project.EntityManager.list,
-                CommonFieldList,
-                CommonTypeList,
-                IntegerFieldList,
-                selected: ''
-            };
-        },
-        methods: {
-            add() {
-                LDData.show('Select a Type', FieldTypeList, 'type', null, field => {
-                    try {
-                        const fff = this.manager.cloneType(field.type);
-                        this.manager.add(fff);
-                        this.rename(fff);
-                    } catch (error) {
-                        see(error, 400);
-                    }
-                });
-            },
-            addField(name, list) {
-                try {
-                    const found = list.find(item => item.name === name);
-                    const fff = this.manager.make(found.name, found.type);
-                    fff.load(found);
-                    this.manager.add(fff);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            addName(name) {
-                try {
-                    const fff = this.manager.make(name, 'integer');
-                    this.manager.add(fff);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            addType(type) {
-                try {
-                    this.selected = '';
-                    const field = this.manager.cloneType(type);
-                    this.manager.add(field);
-                    this.rename(field);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            copy() {
-                LDData.show('Select a Table', this.EntityList, 'tableName', null, entity => {
-                    try {
-                        entity.FieldManager.list.forEach(field => {
-                            if (this.manager.find(field.name)) {
-                                return;
-                            }
-                            const fff = this.manager.make(field.name, field.type);
-                            fff.load(field);
-                            this.manager.add(fff);
-                        });
-                    } catch (error) {
-                        see(error, 400);
-                    }
-                });
-            },
-            remove(field) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(field);
-                    }
-                });
-            },
-            rename(field) {
-                enter('Please enter the Field name', field.name).then(result => {
-                    if (result.value) {
-                        try {
-                            field.name = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            setType(field) {
-                LDData.show('Select a Type', FieldTypeList, 'type', null, result => {
-                    field.type = result.type;
-                });
-            }
+export default {
+    name: 'Field',
+    props: ['manager'],
+    components: { FieldPanel },
+    data() {
+        return {
+            EntityList: bus.project.EntityManager.list,
+            CommonFieldList,
+            CommonTypeList,
+            IntegerFieldList,
+            selected: '',
         }
-    };
+    },
+    methods: {
+        add() {
+            LDData.show('Select a Type', FieldTypeList, 'type', null, field => {
+                try {
+                    const fff = this.manager.cloneType(field.type)
+                    this.manager.add(fff)
+                    this.rename(fff)
+                } catch (error) {
+                    see(error, 400)
+                }
+            })
+        },
+        addField(name, list) {
+            try {
+                const found = list.find(item => item.name === name)
+                const fff = this.manager.make(found.name, found.type)
+                fff.load(found)
+                this.manager.add(fff)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        addName(name) {
+            try {
+                const fff = this.manager.make(name, 'integer')
+                this.manager.add(fff)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        addType(type) {
+            try {
+                this.selected = ''
+                const field = this.manager.cloneType(type)
+                this.manager.add(field)
+                this.rename(field)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        copy() {
+            LDData.show('Select a Table', this.EntityList, 'tableName', null, entity => {
+                try {
+                    entity.FieldManager.list.forEach(field => {
+                        if (this.manager.find(field.name)) {
+                            return
+                        }
+                        const fff = this.manager.make(field.name, field.type)
+                        fff.load(field)
+                        this.manager.add(fff)
+                    })
+                } catch (error) {
+                    see(error, 400)
+                }
+            })
+        },
+        remove(field) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(field)
+                }
+            })
+        },
+        rename(field) {
+            enter('Please enter the Field name', field.name).then(result => {
+                if (result.value) {
+                    try {
+                        field.name = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        setType(field) {
+            LDData.show('Select a Type', FieldTypeList, 'type', null, result => {
+                field.type = result.type
+            })
+        },
+    },
+}
 </script>

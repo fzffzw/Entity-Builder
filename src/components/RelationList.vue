@@ -15,7 +15,13 @@
             </tr>
         </thead>
         <tbody>
-            <Relation v-for="relation in manager.list" :relation="relation" :manager="manager" :key="relation.name" @remove="remove"></Relation>
+            <Relation
+                v-for="relation in manager.list"
+                :relation="relation"
+                :manager="manager"
+                :key="relation.name"
+                @remove="remove"
+            ></Relation>
         </tbody>
         <tfoot>
             <tr>
@@ -23,7 +29,9 @@
                 <td>
                     <select @change="add($event.target.value)" class="form-control">
                         <option selected="true" disabled="disabled">...</option>
-                        <option v-for="entity in EntityList" :value="entity.name" :key="entity.name">{{ entity.name }}</option>
+                        <option v-for="entity in EntityList" :value="entity.name" :key="entity.name">
+                            {{ entity.name }}
+                        </option>
                     </select>
                 </td>
                 <td></td>
@@ -37,38 +45,38 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, sure } from '../helper/dialogue';
-    import Relation from './Relation';
+import bus from '../helper/event'
+import { see, sure } from '../helper/dialogue'
+import Relation from './Relation'
 
-    export default {
-        name: 'RelationList',
-        components: { Relation },
-        props: ['manager'],
-        data() {
-            return {
-                bus,
-                EntityList: bus.project.EntityManager.list
-            };
-        },
-        created() {},
-        methods: {
-            add(name) {
-                try {
-                    const found = this.EntityList.find(item => item.name === name);
-                    const relation = this.manager.link(found);
-                    this.manager.add(relation);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            remove(relation) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(relation);
-                    }
-                });
-            }
+export default {
+    name: 'RelationList',
+    components: { Relation },
+    props: ['manager'],
+    data() {
+        return {
+            bus,
+            EntityList: bus.project.EntityManager.list,
         }
-    };
+    },
+    created() {},
+    methods: {
+        add(name) {
+            try {
+                const found = this.EntityList.find(item => item.name === name)
+                const relation = this.manager.link(found)
+                this.manager.add(relation)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        remove(relation) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(relation)
+                }
+            })
+        },
+    },
+}
 </script>

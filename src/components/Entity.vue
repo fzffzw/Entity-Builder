@@ -30,7 +30,12 @@
                 </td>
                 <td>
                     <div class="btn-group">
-                        <span v-for="file in entity.FileManager.list" @click="deploy(file, entity)" :key="file.fileTypeName" class="btn btn-default btn-sm">
+                        <span
+                            v-for="file in entity.FileManager.list"
+                            @click="deploy(file, entity)"
+                            :key="file.fileTypeName"
+                            class="btn btn-default btn-sm"
+                        >
                             {{ file.fileTypeName }}
                         </span>
                     </div>
@@ -54,104 +59,104 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, sure, enter } from '../helper/dialogue';
-    import { deployFile, deployGroup, deployAll } from '../helper/request';
-    import { zipAll, zipEntity } from '../helper/zip';
+import bus from '../helper/event'
+import { see, sure, enter } from '../helper/dialogue'
+import { deployFile, deployGroup, deployAll } from '../helper/request'
+import { zipAll, zipEntity } from '../helper/zip'
 
-    export default {
-        name: 'Entity',
-        props: ['manager'],
-        data() {
-            return {
-                bus
-            };
-        },
-        methods: {
-            add() {
-                enter('Please enter the Main name').then(result => {
-                    if (result.value) {
-                        try {
-                            const entity = bus.project.EntityManager.make(result.value);
-                            bus.project.EntityManager.add(entity);
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            setName(entity) {
-                enter('Please enter the Main name', entity.name).then(result => {
-                    if (result.value) {
-                        try {
-                            entity.name = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            setTableName(entity) {
-                enter('Please enter the Table name', entity.tableName).then(result => {
-                    if (result.value) {
-                        try {
-                            entity.tableName = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            remove(entity) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(entity);
-                    }
-                });
-            },
-            deploy(file, entity) {
-                if (bus.php) {
-                    deployFile(bus.project, entity, file)
-                        .then(response => {
-                            see(response.message, 200);
-                        })
-                        .catch(error => {
-                            see(error.message, 400);
-                        });
-                }
-            },
-            deployGroup(entity) {
-                deployGroup(bus.project, entity)
-                    .then(response => {
-                        see(response.message, 200);
-                    })
-                    .catch(error => {
-                        see(error.message, 400);
-                    });
-            },
-            deployAll() {
-                deployAll(bus.project)
-                    .then(response => {
-                        see(response.message, 200);
-                    })
-                    .catch(error => {
-                        see(error.message, 400);
-                    });
-            },
-            zip(entity) {
-                try {
-                    zipEntity(entity, bus.project);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            zipAll() {
-                try {
-                    zipAll(bus.project);
-                } catch (error) {
-                    see(error, 400);
-                }
-            }
+export default {
+    name: 'Entity',
+    props: ['manager'],
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+    methods: {
+        add() {
+            enter('Please enter the Main name').then(result => {
+                if (result.value) {
+                    try {
+                        const entity = bus.project.EntityManager.make(result.value)
+                        bus.project.EntityManager.add(entity)
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        setName(entity) {
+            enter('Please enter the Main name', entity.name).then(result => {
+                if (result.value) {
+                    try {
+                        entity.name = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        setTableName(entity) {
+            enter('Please enter the Table name', entity.tableName).then(result => {
+                if (result.value) {
+                    try {
+                        entity.tableName = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        remove(entity) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(entity)
+                }
+            })
+        },
+        deploy(file, entity) {
+            if (bus.php) {
+                deployFile(bus.project, entity, file)
+                    .then(response => {
+                        see(response.message, 200)
+                    })
+                    .catch(error => {
+                        see(error.message, 400)
+                    })
+            }
+        },
+        deployGroup(entity) {
+            deployGroup(bus.project, entity)
+                .then(response => {
+                    see(response.message, 200)
+                })
+                .catch(error => {
+                    see(error.message, 400)
+                })
+        },
+        deployAll() {
+            deployAll(bus.project)
+                .then(response => {
+                    see(response.message, 200)
+                })
+                .catch(error => {
+                    see(error.message, 400)
+                })
+        },
+        zip(entity) {
+            try {
+                zipEntity(entity, bus.project)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        zipAll() {
+            try {
+                zipAll(bus.project)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+    },
+}
 </script>

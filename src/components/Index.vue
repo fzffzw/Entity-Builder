@@ -53,49 +53,49 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, sure } from '../helper/dialogue';
-    import { LDData } from './ListDialogue';
+import bus from '../helper/event'
+import { see, sure } from '../helper/dialogue'
+import { LDData } from './ListDialogue'
 
-    export default {
-        name: 'Index',
-        props: ['manager'],
-        data() {
-            return {
-                bus
-            };
-        },
-        methods: {
-            add() {
-                const name = 'index' + Date.now();
-                const index = this.manager.make(name);
-                this.manager.add(index);
-            },
-            addField(index) {
-                LDData.show('Select a Field', bus.item.FieldManager.list, 'name', null, field => {
-                    try {
-                        const fff = index.FieldManager.make(field.name);
-                        index.FieldManager.add(fff);
-                    } catch (error) {
-                        see(error, 400);
-                    }
-                });
-            },
-            remove(index) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(index);
-                    }
-                });
-            }
+export default {
+    name: 'Index',
+    props: ['manager'],
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+    methods: {
+        add() {
+            const name = 'index' + Date.now()
+            const index = this.manager.make(name)
+            this.manager.add(index)
+        },
+        addField(index) {
+            LDData.show('Select a Field', bus.item.FieldManager.list, 'name', null, field => {
+                try {
+                    const fff = index.FieldManager.make(field.name)
+                    index.FieldManager.add(fff)
+                } catch (error) {
+                    see(error, 400)
+                }
+            })
+        },
+        remove(index) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(index)
+                }
+            })
+        },
+    },
+}
 </script>
 
 <style>
-    .index-border {
-        border: 1px solid darkgray;
-        border-radius: 3px;
-        margin-right: 4px;
-    }
+.index-border {
+    border: 1px solid darkgray;
+    border-radius: 3px;
+    margin-right: 4px;
+}
 </style>

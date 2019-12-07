@@ -6,7 +6,7 @@
         </div>
 
         <div v-for="file in bus.project.FileTypeManager.list" :key="file.name">
-            <table v-if="bus.item && file.name==bus.item.name" class="table">
+            <table v-if="bus.item && file.name == bus.item.name" class="table">
                 <caption class="title">
                     <h1>{{ file.name }}</h1>
                     <span v-if="!file.original" @click="remove(file)" class="btn btn-danger"> X </span>
@@ -27,7 +27,9 @@
                     <tr>
                         <td>NameSpace</td>
                         <td>
-                            <span @click="change('NameSpace', file)" class="btn btn-default">{{ plus(file.NameSpace) }}</span>
+                            <span @click="change('NameSpace', file)" class="btn btn-default">
+                                {{ plus(file.NameSpace) }}
+                            </span>
                         </td>
                     </tr>
                     <tr>
@@ -53,55 +55,55 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import { see, sure, enter } from '../helper/dialogue';
+import bus from '../helper/event'
+import { see, sure, enter } from '../helper/dialogue'
 
-    export default {
-        name: 'FileType',
-        data() {
-            return {
-                bus,
-                visible: false
-            };
-        },
-        methods: {
-            add() {
-                enter('Please enter the name').then(result => {
-                    if (result.value) {
-                        try {
-                            const file = bus.project.FileTypeManager.make(result.value);
-                            bus.project.FileTypeManager.add(file);
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            plus(key) {
-                if (key) {
-                    return key;
-                }
-                return '+';
-            },
-            change(key, owner) {
-                enter('Please enter the ' + key, owner[key]).then(result => {
-                    if (result.value === undefined) {
-                        return;
-                    }
-                    try {
-                        owner[key] = result.value;
-                    } catch (error) {
-                        see(error, 400);
-                    }
-                });
-            },
-            remove(file) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        bus.project.FileTypeManager.remove(file);
-                    }
-                });
-            }
+export default {
+    name: 'FileType',
+    data() {
+        return {
+            bus,
+            visible: false,
         }
-    };
+    },
+    methods: {
+        add() {
+            enter('Please enter the name').then(result => {
+                if (result.value) {
+                    try {
+                        const file = bus.project.FileTypeManager.make(result.value)
+                        bus.project.FileTypeManager.add(file)
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        plus(key) {
+            if (key) {
+                return key
+            }
+            return '+'
+        },
+        change(key, owner) {
+            enter('Please enter the ' + key, owner[key]).then(result => {
+                if (result.value === undefined) {
+                    return
+                }
+                try {
+                    owner[key] = result.value
+                } catch (error) {
+                    see(error, 400)
+                }
+            })
+        },
+        remove(file) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    bus.project.FileTypeManager.remove(file)
+                }
+            })
+        },
+    },
+}
 </script>

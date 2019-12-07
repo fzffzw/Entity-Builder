@@ -10,23 +10,23 @@
 </template>
 
 <script>
-    import nomnoml from 'nomnoml';
-    import bus from '../helper/event';
-    import { make } from '../helper/diagram';
+import nomnoml from 'nomnoml'
+import bus from '../helper/event'
+import { make } from '../helper/diagram'
 
-    export default {
-        name: 'Diagram',
-        data() {
-            return {
-                bus
-            };
-        },
-        methods: {
-            draw() {
-                const canvas = document.getElementById('diagram-canvas');
-                const data = make(bus.project);
-                nomnoml.draw(canvas, data);
-            }
+export default {
+    name: 'Diagram',
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+    methods: {
+        draw() {
+            const canvas = document.getElementById('diagram-canvas')
+            const data = make(bus.project)
+            nomnoml.draw(canvas, data)
+        },
+    },
+}
 </script>

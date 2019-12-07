@@ -37,7 +37,9 @@
                         </template>
 
                         <template v-if="'property' == field.seed.type">
-                            <span v-on:click="setProperty(field)" class="btn btn-default">{{ field.seed.property }}</span>
+                            <span v-on:click="setProperty(field)" class="btn btn-default">
+                                {{ field.seed.property }}
+                            </span>
                         </template>
                     </div>
                 </td>
@@ -47,27 +49,27 @@
 </template>
 
 <script>
-    import Entity from '../helper/entity';
-    import { LDData } from './ListDialogue';
+import Entity from '../helper/entity'
+import { LDData } from './ListDialogue'
 
-    export default {
-        name: 'Faker',
-        props: ['manager'],
-        data() {
-            return {};
+export default {
+    name: 'Faker',
+    props: ['manager'],
+    data() {
+        return {}
+    },
+    created() {},
+    methods: {
+        setMethod(field) {
+            LDData.show('Select a Method', Entity.FakerMethodList, null, null, result => {
+                field.seed.method = result
+            })
         },
-        created() {},
-        methods: {
-            setMethod(field) {
-                LDData.show('Select a Method', Entity.FakerMethodList, null, null, result => {
-                    field.seed.method = result;
-                });
-            },
-            setProperty(field) {
-                LDData.show('Select a Property', Entity.FakerPropertyList, null, null, result => {
-                    field.seed.property = result;
-                });
-            }
-        }
-    };
+        setProperty(field) {
+            LDData.show('Select a Property', Entity.FakerPropertyList, null, null, result => {
+                field.seed.property = result
+            })
+        },
+    },
+}
 </script>

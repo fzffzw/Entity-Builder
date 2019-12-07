@@ -38,55 +38,55 @@
 </template>
 
 <script>
-    import { see, enter, sure } from '../helper/dialogue';
+import { see, enter, sure } from '../helper/dialogue'
 
-    export default {
-        name: 'ItemList',
-        props: ['manager', 'unique', 'showX'],
-        data() {
-            return {
-                title: 'Please enter the name'
-            };
-        },
-        methods: {
-            add() {
-                if (this.unique) {
-                    enter(this.title).then(result => {
-                        if (result.value) {
-                            this.make(result.value);
-                        }
-                    });
-                    return;
-                }
-
-                this.make('name');
-            },
-            make(name) {
-                try {
-                    const item = this.manager.make(name);
-                    this.manager.add(item);
-                } catch (error) {
-                    see(error, 400);
-                }
-            },
-            rename(item) {
-                enter(this.title, item.name).then(result => {
-                    if (result.value) {
-                        try {
-                            item.name = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            remove(item) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(item);
-                    }
-                });
-            }
+export default {
+    name: 'ItemList',
+    props: ['manager', 'unique', 'showX'],
+    data() {
+        return {
+            title: 'Please enter the name',
         }
-    }
+    },
+    methods: {
+        add() {
+            if (this.unique) {
+                enter(this.title).then(result => {
+                    if (result.value) {
+                        this.make(result.value)
+                    }
+                })
+                return
+            }
+
+            this.make('name')
+        },
+        make(name) {
+            try {
+                const item = this.manager.make(name)
+                this.manager.add(item)
+            } catch (error) {
+                see(error, 400)
+            }
+        },
+        rename(item) {
+            enter(this.title, item.name).then(result => {
+                if (result.value) {
+                    try {
+                        item.name = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        remove(item) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(item)
+                }
+            })
+        },
+    },
+}
 </script>

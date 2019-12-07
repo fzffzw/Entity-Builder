@@ -40,62 +40,62 @@
 </template>
 
 <script>
-    import { see, enter, sure } from '../helper/dialogue';
+import { see, enter, sure } from '../helper/dialogue'
 
-    export default {
-        name: 'Property',
-        props: ['manager', 'noadd'],
-        data() {
-            return {};
-        },
-        methods: {
-            plus(key) {
-                if (key) {
-                    return key;
-                }
-                return '+';
-            },
-            add() {
-                enter('Please enter the name').then(result => {
-                    if (result.value) {
-                        try {
-                            const property = this.manager.make(result.value);
-                            this.manager.add(property);
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            remove(property) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(property);
-                    }
-                });
-            },
-            setName(property) {
-                enter('Please enter the name', property.name).then(result => {
-                    if (result.value) {
-                        try {
-                            property.name = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            setValue(property) {
-                enter('Please enter the value', property.value).then(result => {
-                    if (result.value) {
-                        try {
-                            property.value = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
+export default {
+    name: 'Property',
+    props: ['manager', 'noadd'],
+    data() {
+        return {}
+    },
+    methods: {
+        plus(key) {
+            if (key) {
+                return key
             }
-        }
-    };
+            return '+'
+        },
+        add() {
+            enter('Please enter the name').then(result => {
+                if (result.value) {
+                    try {
+                        const property = this.manager.make(result.value)
+                        this.manager.add(property)
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        remove(property) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(property)
+                }
+            })
+        },
+        setName(property) {
+            enter('Please enter the name', property.name).then(result => {
+                if (result.value) {
+                    try {
+                        property.name = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+        setValue(property) {
+            enter('Please enter the value', property.value).then(result => {
+                if (result.value) {
+                    try {
+                        property.value = result.value
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
+        },
+    },
+}
 </script>

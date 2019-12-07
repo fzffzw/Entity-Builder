@@ -45,45 +45,45 @@
 </template>
 
 <script>
-    import { see, sure, enter } from '../helper/dialogue';
+import { see, sure, enter } from '../helper/dialogue'
 
-    export default {
-        name: 'Variable',
-        props: ['manager'],
-        data() {
-            return {};
+export default {
+    name: 'Variable',
+    props: ['manager'],
+    data() {
+        return {}
+    },
+    methods: {
+        add() {
+            enter('Please enter the Variable name').then(result => {
+                if (result.value) {
+                    try {
+                        const variable = this.manager.make(result.value)
+                        this.manager.add(variable)
+                    } catch (error) {
+                        see(error, 400)
+                    }
+                }
+            })
         },
-        methods: {
-            add() {
-                enter('Please enter the Variable name').then(result => {
-                    if (result.value) {
-                        try {
-                            const variable = this.manager.make(result.value);
-                            this.manager.add(variable);
-                        } catch (error) {
-                            see(error, 400);
-                        }
+        rename(variable) {
+            enter('Please enter the Variable name', variable.name).then(result => {
+                if (result.value) {
+                    try {
+                        variable.name = result.value
+                    } catch (error) {
+                        see(error, 400)
                     }
-                });
-            },
-            rename(variable) {
-                enter('Please enter the Variable name', variable.name).then(result => {
-                    if (result.value) {
-                        try {
-                            variable.name = result.value;
-                        } catch (error) {
-                            see(error, 400);
-                        }
-                    }
-                });
-            },
-            remove(variable) {
-                sure('Are you sure?').then(result => {
-                    if (result.value) {
-                        this.manager.remove(variable);
-                    }
-                });
-            }
-        }
-    };
+                }
+            })
+        },
+        remove(variable) {
+            sure('Are you sure?').then(result => {
+                if (result.value) {
+                    this.manager.remove(variable)
+                }
+            })
+        },
+    },
+}
 </script>

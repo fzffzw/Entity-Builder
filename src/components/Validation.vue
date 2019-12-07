@@ -11,7 +11,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="field in manager.list" :key="field.name" :class="{'disabled':!field.included}">
+            <tr v-for="field in manager.list" :key="field.name" :class="{ disabled: !field.included }">
                 <td>
                     <label> <input v-model="field.included" type="checkbox" /> {{ field.name }} </label>
                 </td>
@@ -33,49 +33,49 @@
 </template>
 
 <script>
-    import { check } from '../helper/rule';
-    import RuleTab from './RuleTab';
+import { check } from '../helper/rule'
+import RuleTab from './RuleTab'
 
-    export default {
-        name: 'Validation',
-        components: { RuleTab },
-        props: ['manager', 'entity'],
-        data() {
-            return {};
+export default {
+    name: 'Validation',
+    components: { RuleTab },
+    props: ['manager', 'entity'],
+    data() {
+        return {}
+    },
+    created() {},
+    methods: {
+        setRule() {
+            check(this.entity)
         },
-        created() {},
-        methods: {
-            setRule() {
-                check(this.entity);
-            }
-        }
-    };
+    },
+}
 </script>
 
 <style>
-    .table tr.disabled {
-        color: #888888;
-    }
+.table tr.disabled {
+    color: #888888;
+}
 
-    ul.rule {
-        margin: 0;
-        padding: 0;
-    }
+ul.rule {
+    margin: 0;
+    padding: 0;
+}
 
-    .table tr.disabled ul.rule {
-        display: none;
-    }
+.table tr.disabled ul.rule {
+    display: none;
+}
 
-    .table tr.disabled .none-rule {
-        display: none;
-    }
+.table tr.disabled .none-rule {
+    display: none;
+}
 
-    ul.rule .editing {
-        line-height: 3;
-    }
+ul.rule .editing {
+    line-height: 3;
+}
 
-    ul.rule input {
-        width: 333px;
-        display: inline-block;
-    }
+ul.rule input {
+    width: 333px;
+    display: inline-block;
+}
 </style>

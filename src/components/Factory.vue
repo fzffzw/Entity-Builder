@@ -5,17 +5,17 @@
 </template>
 
 <script>
-    import bus from '../helper/event';
-    import Faker from './Faker';
-    import File from './File';
+import bus from '../helper/event'
+import Faker from './Faker'
+import File from './File'
 
-    export default {
-        name: 'Factory',
-        components: { Faker, File },
-        data() {
-            return {
-                bus
-            };
+export default {
+    name: 'Factory',
+    components: { Faker, File },
+    data() {
+        return {
+            bus,
         }
-    };
+    },
+}
 </script>
