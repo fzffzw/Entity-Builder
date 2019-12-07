@@ -12,6 +12,6 @@ class {{ file.name }} extends Seeder
      */
     public function run()
     {
-        factory({{ model.name }}::class, {{ file.FileType.get('count').value }})->create();
+        factory({{ model.name }}::class, 1)->create();
     }
 }
