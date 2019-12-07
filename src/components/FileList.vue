@@ -11,6 +11,8 @@
     import bus from '../helper/event';
     import File from './File';
 
+    const TabList = ['Migration', 'Model', 'Request', 'Factory',]
+
     export default {
         name: 'FileList',
         components: { File },
@@ -21,7 +23,7 @@
         },
         computed: {
             fileWithoutTab() {
-                return bus.project.FileTypeManager.list.filter(file => file.hasTab == false);
+                return bus.project.FileTypeManager.list.filter(file => TabList.indexOf(file.name) == -1);
             }
         },
         methods: {
