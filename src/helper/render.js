@@ -6,6 +6,7 @@ export default function render(project, entity, file) {
         project,
         entity,
         file,
+        data: process(project, entity, file),
         model: entity.FileManager.findByType('Model'),
         request: entity.FileManager.findByType('Request'),
     }
@@ -20,4 +21,13 @@ function getTemplate(file) {
         return file.FileType.template
     }
     return Template[file.FileType.templateName]
+}
+
+function process(project, entity, file) {
+    const data = {}
+    if (file.FileType.script) {
+        const script = new Function('return ' + file.FileType.script)()
+        script(project, entity, file, data)
+    }
+    return data
 }

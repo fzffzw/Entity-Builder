@@ -46,6 +46,12 @@
                             <span @click="change('suffix', file)" class="btn btn-default">{{ plus(file.suffix) }}</span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>script</td>
+                        <td>
+                            <textarea v-model="file.script" rows="22" class="form-control" spellcheck="false"></textarea>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
