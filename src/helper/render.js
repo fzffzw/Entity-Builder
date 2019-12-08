@@ -9,11 +9,15 @@ export default function render(project, entity, file) {
         model: entity.FileManager.findByType('Model'),
         request: entity.FileManager.findByType('Request'),
     }
-    let template = Template[file.FileType.templateName]
-    if (file.FileType.template) {
-        template = file.FileType.template
-    }
+    const template = getTemplate(file)
     const result = nunjucks.renderString(template, data)
     // console.log(result)
     return result
+}
+
+function getTemplate(file) {
+    if (file.FileType.template) {
+        return file.FileType.template
+    }
+    return Template[file.FileType.templateName]
 }
