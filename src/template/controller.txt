@@ -78,11 +78,11 @@ class {{ file.name }} extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }}  $request
      * @param int $id
+     * @param  \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }}  $request
      * @return \Illuminate\Http\Response
      */
-    public function update({{ request.name }} $request, $id)
+    public function update($id, {{ request.name }} $request)
     {
         $item = {{ model.name }}::query()->findOrFail($id);
         $item->update($request->validated());
