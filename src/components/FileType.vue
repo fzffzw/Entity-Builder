@@ -46,10 +46,6 @@
                             <span @click="change('suffix', file)" class="btn btn-default">{{ plus(file.suffix) }}</span>
                         </td>
                     </tr>
-                    <tr v-show="visible">
-                        <td></td>
-                        <td><textarea v-model="file.template" rows="11" class="form-control"></textarea></td>
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -65,7 +61,6 @@ export default {
     data() {
         return {
             bus,
-            visible: false,
         }
     },
     methods: {
