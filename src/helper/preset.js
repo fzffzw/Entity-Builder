@@ -15,10 +15,10 @@ export const FileType = {
 }
 
 export default function run(project) {
-    addTemplate(project.FileTypeManager)
+    addFileType(project.FileTypeManager)
 }
 
-function addTemplate(manager) {
+function addFileType(manager) {
     const controller = manager.make(FileType.Controller)
     controller.original = true
     controller.path = 'app/Http/Controllers'
