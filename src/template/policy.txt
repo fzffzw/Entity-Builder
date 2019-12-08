@@ -13,8 +13,8 @@ class {{ file.name }}
     /**
      * Determine whether the user can view the {{ model.name }}.
      *
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\{{ model.name }}  ${{ model.snakeCase }}
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\{{ model.name }} ${{ model.snakeCase }}
      * @return mixed
      */
     public function view(User $user, {{ model.name }} ${{ model.snakeCase }})
@@ -25,7 +25,7 @@ class {{ file.name }}
     /**
      * Determine whether the user can create {{ model.name }}.
      *
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
      * @return mixed
      */
     public function create(User $user)
@@ -36,8 +36,8 @@ class {{ file.name }}
     /**
      * Determine whether the user can update the {{ model.name }}.
      *
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\{{ model.name }}  ${{ model.snakeCase }}
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\{{ model.name }} ${{ model.snakeCase }}
      * @return mixed
      */
     public function update(User $user, {{ model.name }} ${{ model.snakeCase }})
@@ -48,8 +48,8 @@ class {{ file.name }}
     /**
      * Determine whether the user can delete the {{ model.name }}.
      *
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
-     * @param  \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\{{ model.name }}  ${{ model.snakeCase }}
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\User $user
+     * @param \{{ project.NameSpace }}\{{ model.FileType.NameSpace }}\{{ model.name }} ${{ model.snakeCase }}
      * @return mixed
      */
     public function delete(User $user, {{ model.name }} ${{ model.snakeCase }})

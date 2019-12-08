@@ -37,7 +37,7 @@ class {{ file.name }} extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }}  $request
+     * @param \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }} $request
      * @return \Illuminate\Http\Response
      */
     public function store({{ request.name }} $request)
@@ -79,7 +79,7 @@ class {{ file.name }} extends Controller
      * Update the specified resource in storage.
      *
      * @param int $id
-     * @param  \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }}  $request
+     * @param \{{ project.NameSpace }}\{{ request.FileType.NameSpace }}\{{ request.name }} $request
      * @return \Illuminate\Http\Response
      */
     public function update($id, {{ request.name }} $request)
