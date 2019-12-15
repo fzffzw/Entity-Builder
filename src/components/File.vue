@@ -5,6 +5,7 @@
             <template v-if="file">
                 <span class="btn-group">
                     <span @click="remove" class="btn btn-danger"> X </span>
+                    <span @click="script" class="btn btn-primary">Script</span>
                     <span @click="template" class="btn btn-primary">Template</span>
                     <span @click="preview" class="btn btn-success">Preview</span>
                 </span>
@@ -42,6 +43,18 @@ export default {
             } catch (error) {
                 see(error, 400)
             }
+        },
+        script() {
+            const type = this.file.FileType
+            let script = type.script
+            const original = ''
+            CDData.show(type.name, script, true, original, code => {
+                if (code === original) {
+                    type.script = ''
+                } else {
+                    type.script = code
+                }
+            })
         },
         template() {
             let template = ''
