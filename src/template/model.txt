@@ -42,14 +42,22 @@ class {{ model.name }} extends {% if model.name == 'User' %}Authenticatable{% el
      *
      * @var array
      */
-    protected $fillable = {{ entity.FieldManager.fillableText }};
+    protected $fillable = [
+{% for field in entity.FieldManager.fillableList %}
+        '{{ field.name }}',
+{% endfor %}
+    ];
 
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
-    protected $hidden = {{ entity.FieldManager.hiddenText }};
+    protected $hidden = [
+{% for field in entity.FieldManager.hiddenList %}
+        '{{ field.name }}',
+{% endfor %}
+    ];
 
     /**
      * The attributes that should be cast to native types.
@@ -57,9 +65,9 @@ class {{ model.name }} extends {% if model.name == 'User' %}Authenticatable{% el
      * @var array
      */
     protected $casts = [
-{% for field in entity.FieldManager.list %}{% if field.cast %}
+{% for field in entity.FieldManager.castList %}
         '{{ field.name }}' => '{{ field.cast }}',
-{% endif %}{% endfor %}
+{% endfor %}
     ];
 
     /**
