@@ -44,17 +44,17 @@
                 <td>
                     <select @change="addField($event.target.value, IntegerFieldList)" class="form-control">
                         <option selected="true" disabled="disabled">...</option>
-                        <option v-for="field in IntegerFieldList" :value="field.name" :key="field.name">{{
-                            field.name
-                        }}</option>
+                        <option v-for="field in IntegerFieldList" :value="field.name" :key="field.name">
+                            {{ field.name }}
+                        </option>
                     </select>
                 </td>
                 <td>
                     <select @change="addField($event.target.value, CommonFieldList)" class="form-control">
                         <option selected="true" disabled="disabled">...</option>
-                        <option v-for="field in CommonFieldList" :value="field.name" :key="field.name">{{
-                            field.name
-                        }}</option>
+                        <option v-for="field in CommonFieldList" :value="field.name" :key="field.name">
+                            {{ field.name }}
+                        </option>
                     </select>
                 </td>
                 <td>
