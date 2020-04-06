@@ -22,7 +22,7 @@
         },
         data() {
             return {
-                form: DefaultValue,
+                form: DefaultValue(),
                 waiting: false
             }
         },
@@ -41,10 +41,12 @@
         }
     }
 
-    const DefaultValue = {
+    function DefaultValue() {
+        return {
 {% for field in entity.FieldManager.includedList %}
-        {{ field.name }}: {{ field.jsValue }},
+            {{ field.name }}: {{ field.jsValue }},
 {% endfor %}
-        ____: null
+            waiting: false
+        }
     }
 </script>

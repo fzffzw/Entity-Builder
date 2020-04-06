@@ -4,7 +4,7 @@ export default class {{ file.name }} extends React.Component {
     constructor(props) {
         super(props)
         this.set = this.set.bind(this);
-        this.state = DefaultValue
+        this.state = DefaultValue()
     }
 
     set(event) {
@@ -35,9 +35,11 @@ export default class {{ file.name }} extends React.Component {
     }
 }
 
-const DefaultValue = {
+function DefaultValue() {
+    return {
 {% for field in entity.FieldManager.includedList %}
-    {{ field.name }}: {{ field.jsValue }},
+        {{ field.name }}: {{ field.jsValue }},
 {% endfor %}
-    waiting: false
+        waiting: false
+    }
 }

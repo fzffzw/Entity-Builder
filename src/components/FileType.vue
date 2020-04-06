@@ -46,6 +46,12 @@
                             <span @click="change('suffix', file)" class="btn btn-default">{{ plus(file.suffix) }}</span>
                         </td>
                     </tr>
+                    <tr>
+                        <td>template</td>
+                        <td>
+                            <span class="btn btn-default">{{ file.template }}</span>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
